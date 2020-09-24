@@ -1,0 +1,7 @@
+{% for x in  data.coments %}
+Имя коментария: {{ x.name }}<br>
+Коментарий создал: {{x.created_by }}<br>
+Текст: {{ x.body }}<br>
+Дата создания: {{ x.date_create }}<br>
+<hr>
+{% endfor %}

@@ -1,0 +1,7 @@
+ФОРМА ДОБАВЛЕНИ СПРИНТА<br>
+<form action="/management/create-sprint/"  method="post">
+{% csrf_token %}
+{{ sprint_create_form.as_p }}
+<input type="hidden" name="project_id" value={{ project_id }}>
+<input value="Создать спринт" type="submit">
+</form>

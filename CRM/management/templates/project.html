@@ -1,0 +1,21 @@
+{{ data.project.name }}<br>
+Администратор: {{ data.project.admin }}<br>
+Описание проекта: {{ data.project.description }}<br>
+ПОИСК ПО НОМЕРУ<br>
+<form action="/management/search/"  method="get">
+<input type="text" name="search">
+<input value="Поис" type="submit">
+<input type="hidden" name="project_id" value={{ data.project.id }}>
+</form>
+СПРИНТЫ:<br>
+{% for x in data.sprint %}
+<a href="/management/sprint/{{ x.id }}"> {{ x.name }} </a><br>
+{% endfor %}
+<hr>
+{% if user.is_authenticated %}
+<a href="/management/form-add-sprint/{{ data.project.id }}"> ДОБАВИТЬ СПРИНТ </a><br>
+<a href="/management/form-add-issue/{{ data.project.id }}"> ДОБАВИТЬ ЗАПРОС </a><br>
+<a href="/management/members-project/{{ data.project.id }}"> Учасники проекта </a><br>
+<a href="/management/list-issues/{{ data.project.id }}"> Запросы </a><br>
+<a href="/management/list-issues-two/{{ data.project.id }}"> Альтернативный список запросов </a><br>
+{% endif %}

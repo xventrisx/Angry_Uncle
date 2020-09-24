@@ -1,0 +1,6 @@
+<form action="/management/sendinvitation" method="post">
+{% csrf_token %}
+{{ tokenemail.as_p }}
+<input value="Отправить приглашение" type="submit">
+</form>
+Вернутся на <a href="/management/homepage"> главную </a> страницу <br>

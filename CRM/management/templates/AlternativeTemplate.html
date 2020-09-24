@@ -1,0 +1,18 @@
+{% for i in data.data %}
+Запросы для проекта <a href="/management/my-project/{{ i.0.project.id }}">{{ i.0.project.name }}</a><br>
+Запрос создал <a href="/management/user/{{ i.0.created_by.id }}"> {{ i.0.created_by }} </a><br>
+Ответственный <a href="/management/user/{{ i.0.responsible.id }}"> {{ i.0.responsible }} </a><br>
+<form action="/management/change-status-issue-two/" method="post">
+{% csrf_token %}
+Статус запроса: {{ i.0.status }}<br>
+{{ i.1.as_p }}<br>
+<input type="hidden" name="issue_id" value={{ i.0.id }}>
+<input type="hidden" name="project_id" value={{ i.0.project.id }}>
+<input value="Обновить статус" type="submit">
+</form>
+Текст: {{ i.0.body }}<br>
+Дата создания: {{ i.0.date_create }}<br>
+Дадта обновления: {{ i.0.date_update }}<br>
+Дата закрытия: {{ i.0.date_closed }}<br>
+<hr>
+{% endfor %}

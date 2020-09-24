@@ -1,0 +1,20 @@
+По Вашему запросу найдено:<br>
+Спринты<br>
+{% for x in data.sprint %}
+<a href="/management/sprint/{{ x.id }}"> {{ x.name }} </a> номер {{ x.number }}<br>
+{% endfor %}
+<hr>
+Пользовательские истории:<br>
+{% for x in data.userstory %}
+<a href="/management/userstory/{{ x.id }}"> {{ x.name }} </a> номер {{ x.number }}<br>
+{% endfor %}
+<hr>
+Задачи:<br>
+{% for x in  data.task %}
+<a href="/management/task/{{ x.id }}"> {{ x.name }} </a> номер {{ x.number }} <br>
+{% endfor %}
+<hr>
+Запросы:<br>
+{% for x in data.issue %}
+<a href="/management/issue-info/{{ x.id }}"> {{ x.name }} </a> номер {{ x.number }} <br>
+{% endfor %}

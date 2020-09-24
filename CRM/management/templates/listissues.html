@@ -1,0 +1,5 @@
+Запросы для проекта <a href="/management/my-project/{{ data.project.id }}">{{ data.project.name }}</a><br>
+Название запроса:<br>
+{% for x in data.issues %}
+<a href="/management/issue-info/{{ x.id }}"> {{ x.name }} </a><br>
+{% endfor %}

@@ -1,0 +1,11 @@
+Запросы для проекта <a href="/management/my-project/{{ data.project.id }}">{{ data.project.name }}</a><br>
+{% for x in data.issues %}
+Запрос создал <a href="/management/user/{{ x.created_by.id }}"> {{ x.created_by }} </a><br>
+Ответственный <a href="/management/user/{{ x.responsible.id }}"> {{ x.responsible }} </a><br>
+Статус: {{ x.status }}<br>
+Текст: {{ x.body }}<br>
+Дата создания: {{ x.date_create }}<br>
+Дадта обновления: {{ x.date_update }}<br>
+Дата закрытия: {{ x.date_closed }}<br>
+<hr>
+{% endfor %}

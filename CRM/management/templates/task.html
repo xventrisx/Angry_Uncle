@@ -1,0 +1,36 @@
+Имя задачи: {{ task.task.name }}<br>
+Задачу создал: {{ task.task.created_by }}<br>
+Ответственные: <a href="/management/user/{{ task.task.responsible.id }}"> {{ task.task.responsible }} </a><br>
+<form action="/management/change-responsible-task/" method="post">
+{% csrf_token %}
+Назначить нового ответственного: <br>
+{{ form_responsible.as_p }}<br>
+<input type="hidden" name="task_id" value={{ task.task.id }}>
+<input value="Назначить" type="submit">
+</form>
+<form action="/management/change-status-task/" method="post">
+{% csrf_token %}
+Статус задачи: {{ task.task.status }}<br>
+{{ task_status.as_p }}<br>
+<input type="hidden" name="task_id" value={{ task.task.id }}>
+<input value="Обновить статус" type="submit">
+</form>
+<a href="/management/userstory/{{ task.task.user_story.id }}"> Пользовательская история </a><br>
+Описание: {{ task.task.description }}<br>
+Выполнить до: {{ task.task.time_completion }}<br>
+Даата расмотрения: {{ task.task.review }}<br>
+<hr>
+КОМЕНТАРИИ:<br>
+{% for i in coments.coments %}
+Коментарий добавил:<a href="/management/user/{{ i.created_by.id }}"> {{ i.created_by }}</a><br>
+Текс: {{i.body }}<br>
+Дата создания {{ i.date_create }}<br>
+{% endfor %}
+<hr>
+ФОРМА ДОБАВЛЕНИЯ КОМЕНТАРИЯ
+<form action="/management/create-coment-for-task/"  method="post">
+{% csrf_token %}
+{{ form_add_coment.as_p }}
+<input type="hidden" name="task_id" value={{ task.task.id }}>
+<input value="Добавить коментарий" type="submit">
+</form>

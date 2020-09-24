@@ -1,0 +1,5 @@
+<form action="/management/entrance"  method="post">
+{% csrf_token %}
+{{ loginform.as_p }}
+<input value="Вход" type="submit">
+</form>

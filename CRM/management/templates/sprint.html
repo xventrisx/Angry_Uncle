@@ -1,0 +1,53 @@
+Название: {{ sprint.sprint.name }}<br>
+Создатель: <a href="/management/user/{{ sprint.sprint.created_by.id }}"> {{ sprint.sprint.created_by }} </a><br>
+Спринт пренадлежит проекту <a href="/management/my-project/{{ sprint.sprint.project.id }}"> {{ sprint.sprint.project.name }}</a><br>
+Описание спринта : {{ sprint.sprint.description }}<br>
+Отведсьвенные за спринт: <a href="/management/user/{{ sprint.sprint.responsible.id }}"> {{ sprint.sprint.responsible }} </a><br>
+{% if  perms.tasker.change_sprint %}
+<form action="/management/change-responsible-sprint/" method="post">
+{% csrf_token %}
+Назначить нового ответственного<br>
+{{ responsible_sprint.as_p }}<br>
+<input type="hidden" name="sprint_id" value={{ sprint.sprint.id }}>
+<input value="Назначить" type="submit">
+</form>
+{% endif %}
+Статус спринта: {{ sprint.sprint.status }}<br>
+{% if  perms.tasker.change_sprint %}
+<form action="/management/change-status-sprint/" method="post">
+{% csrf_token %}
+{{ sprint_status.as_p }}<br>
+<input type="hidden" name="sprint_id" value={{ sprint.sprint.id }}>
+<input value="Обновить статус" type="submit">
+</form>
+{% endif %}
+Дата создания: {{ sprint.sprint.date_create }}<br>
+Дата обновления: {{ sprint.sprint.data_update }}<br>
+Дата закрытия: {{ sprint.sprint.data_closed }}<br>
+ПОЛЬЗОВАТЕЛЬСКИЕ ИСТОРИИ:<br>
+{% for x in userstorys.list_userstorys %}
+<a href="/management/userstory/{{ x.id }}"> {{ x.name }} </a><br>
+{% endfor %}
+<hr>
+ФОРМА ДОБАВЛЕНИЯ ПОЛЬЗОВАТЕЛЬСКОЙ ИСТОРИИ
+<form action="/management/create-userstory-for-sprint/"  method="post">
+{% csrf_token %}
+{{ form_add_userstory.as_p }}
+<input type="hidden" name="sprint_id" value={{ sprint.sprint.id }}>
+<input value="Добавить пользовательскую историю " type="submit">
+</form>
+<hr>
+КОМЕНТАРИИ:<br>
+{% for i in coments.coments %}
+Коментарий добавил:<a href="/management/user/{{ i.created_by.id }}"> {{ i.created_by }}</a><br>
+Текс: {{i.body }}<br>
+Дата создания {{ i.date_create }}<br>
+{% endfor %}
+<hr>
+ФОРМА ДОБАВЛЕНИЯ КОМЕНТАРИЯ
+<form action="/management/create-coment-for-sprint/"  method="post">
+{% csrf_token %}
+{{ form_add_coment.as_p }}
+<input type="hidden" name="sprint_id" value={{ sprint.sprint.id }}>
+<input value="Добавить коментарий" type="submit">
+</form>

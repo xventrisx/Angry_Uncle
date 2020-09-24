@@ -1,0 +1,35 @@
+Запросы для проекта <a href="/management/my-project/{{ data.issue.project.id }}">{{ data.issue.project.name }}</a><br>
+Запрос создал <a href="/management/user/{{ data.issue.created_by.id }}"> {{ data.issue.created_by }} </a><br>
+<form action="/management/change-responsible-issue/" method="post">
+{% csrf_token %}
+Ответственный <a href="/management/user/{{ data.issue.responsible.id }}"> {{ data.issue.responsible }} </a><br>
+{{ data.responsible_form.as_p }}<br>
+<input type="hidden" name="issue_id" value={{ data.issue.id }}>
+<input value="Обновить статус" type="submit">
+</form>
+<form action="/management/change-status-issue/" method="post">
+{% csrf_token %}
+Статус запроса: {{ data.issue.status }}<br>
+{{ data.issue_status.as_p }}<br>
+<input type="hidden" name="issue_id" value={{ data.issue.id }}>
+<input value="Обновить статус" type="submit">
+</form>
+Текст: {{ data.issue.body }}<br>
+Дата создания: {{ data.issue.date_create }}<br>
+Дадта обновления: {{ data.issue.date_update }}<br>
+Дата закрытия: {{ data.issue.date_closed }}<br>
+<hr>
+Коментарии:<br>
+{% for x in coments.coments %}
+Коментарий добавил:<a href="/management/user/{{ x.created_by.id }}"> {{ x.created_by }}</a><br>
+Текс: {{x.body }}<br>
+Дата создания {{ x.date_create }}<br>
+{% endfor %}
+<hr>
+ФОРМА ДОБАВЛЕНИЯ КОМЕНТАРИЯ
+<form action="/management/create-coment-for-issue/"  method="post">
+{% csrf_token %}
+{{ data.form_add_coment.as_p }}
+<input type="hidden" name="issue_id" value={{ data.issue.id }}>
+<input value="Добавить коментарий" type="submit">
+</form>

@@ -1,0 +1,7 @@
+<form action="/management/register" method="post">
+{% csrf_token %}
+{{ chekin.as_p }}
+<input type="hidden" name="project_id" value={{ project_id }}>
+<input value="Зарегестрировать" type="submit">
+</form>
+Вернутся на страницу <a href="/management/login"> входа </a><br>

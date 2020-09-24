@@ -1,0 +1,61 @@
+Имя пользовательской истории: {{ userstory.userstory.name }}<br>
+Пользовательскую историю создал: <a href="/management/user/{{ data.userstory.created_by.id }}"> {{ userstory.userstory.created_by }} </a><br>
+Ответственные за пользовательскую историю: <br>
+{% for x in  userstory.userstory.responsibles.all %}
+<a href="/management/user/{{ x.id }}"> {{ x.username }} </a><br>
+{% endfor %}
+Назначить нового(..ых) ответственного(..ых)<br>
+{% if perms.tasker.change_userstory %}
+<form action="/management/change-responsible-userstory/"  method="post">
+{% csrf_token %}
+{{ form_responsible_form.as_p }}
+<input type="hidden" name="userstory_id" value={{ userstory.userstory.id }}>
+<input value="Обновить" type="submit">
+</form>
+{% endif %}
+Статус пользовательской истории {{ userstory.userstory.status }}<br>
+{% if perms.tasker.change_userstory %}
+<form action="/management/change-status-userstory/"  method="post">
+{% csrf_token %}
+{{ form_starus_userstoty.as_p }}
+<input type="hidden" name="userstory_id" value={{ userstory.userstory.id }}>
+<input value="Обновить статус" type="submit">
+</form>
+{% endif %}
+Описание пользовательской истории: {{ userstory.userstory.description }}<br>
+Дата создания: {{ userstory.userstory.date_create }}<br>
+Дата обновления: {{ userstory.userstory.data_update }}<br>
+Дата закрытия: {{ userstory.userstory.data_closed }}<br>
+ЗАДАЧИ<br>
+{% for x in  tasks.tasks %}
+<a href="/management/task/{{ x.id }}"> {{ x.name }} </a><br>
+{% endfor %}
+<hr>
+<a href="/management/sprint/{{ userstory.userstory.sprint.id }}"> Вернутся на спринт </a><br>
+<hr>
+ФОРМА ДОБАВЛЕНИЯ ЗАДАЧИ
+{% if perms.tasker.add_task %}
+<form action="/management/create-task-for-userstory/"  method="post">
+{% csrf_token %}
+{{ form_add_task.as_p }}
+<input type="hidden" name="userstory_id" value={{ userstory.userstory.id }}>
+<input value="Добавить задачу " type="submit">
+</form>
+{% endif %}
+<hr>
+КОМЕНТАРИИ:<br>
+{% for i in coments.coments %}
+Коментарий добавил:<a href="/management/user/{{ i.created_by.id }}"> {{ i.created_by }}</a><br>
+Текс: {{i.body }}<br>
+Дата создания {{ i.date_create }}<br>
+{% endfor %}
+<hr>
+ФОРМА ДОБАВЛЕНИЯ КОМЕНТАРИЯ
+{% if perms.tasker.can_add_coment_for_userstory %}
+<form action="/management/create-coment-for-userstory/"  method="post">
+{% csrf_token %}
+{{ form_add_coment.as_p }}
+<input type="hidden" name="userstory_id" value={{ userstory.userstory.id }}>
+<input value="Добавить коментарий" type="submit">
+</form>
+{% endif %}

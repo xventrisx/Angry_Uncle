@@ -1,0 +1,4 @@
+Учасники проекта {{ data.project.name }}<br>
+{% for x in data.members %}
+<a href="/management/user/{{ x.id }}"> {{ x.username }} </a><br>
+{% endfor %}

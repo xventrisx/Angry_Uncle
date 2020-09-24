@@ -1,0 +1,21 @@
+{% if user.is_authenticated %}
+Главная страница<br>
+<a href="/management/invite"> Отправить приглашение </a><br>
+Мои проекты:<br>
+{% for x in my_projects %}
+<a href="/management/my-project/{{x.id}}"> {{ x.name }} </a><br>
+{%endfor%}
+<hr>
+ФОРМА СОЗДАНИЯ ПРОЕКТА<br>
+<form action="/management/create-project/"  method="post">
+{% csrf_token %}
+{{ form_add_project.as_p }}
+<input type="hidden" name="user_id" value={{ user.id }}>
+<input value="Создать проект " type="submit">
+</form>
+<hr>
+<a href="/management/logout"> Выход </a><br>
+{% else %}
+<a href="/login"> Авторизации </a><br>
+<a href="/chekin"> Регистрация </a>
+{% endif %}

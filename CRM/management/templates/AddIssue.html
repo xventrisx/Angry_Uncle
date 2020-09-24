@@ -1,0 +1,7 @@
+ФОРМА ДОБАВЛЕНИЯ ЗАПРОСА<br>
+<form action="/management/create-issue/"  method="post">
+{% csrf_token %}
+{{ issue_create_form.as_p }}
+<input type="hidden" name="project_id" value={{ project_id }}>
+<input value="Отправить запрос" type="submit">
+</form>
