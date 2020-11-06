@@ -41,14 +41,14 @@ class InvitTakesAPIview(generics.CreateAPIView):
         data = serializer.validated_data
         tokenmail = TokenEmail.objects.filter(token=data['token']).exists()
         if tokenmail:
-            user = create_user(data=data)
-            if user != None:
-                user = dict(user_id = user.id)
-                return rest_response.Response(data={'detail': user}, status=rest_status.HTTP_200_OK)
+            result = create_user(data=data)
+            if result != None:
+                result = dict(user_id = result.id)
+                return rest_response.Response(data={'detail': result}, status=rest_status.HTTP_200_OK)
             else:
-                return rest_response.Response(data={'detail': user}, status=rest_status.HTTP_200_OK)
+                return rest_response.Response(data={'detail': result}, status=rest_status.HTTP_200_OK)
         else:
-            return rest_response.Response(data={'detail': user}, status=rest_status.HTTP_200_OK)
+            return rest_response.Response(data={'detail': ''}, status=rest_status.HTTP_200_OK)
 
 class IssueSendAPIview(generics.CreateAPIView):
     serializer_class = IssueCreateSerializer
