@@ -42,6 +42,7 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = [
             'product',
             'quantity',
+            'cashier',
             'shop_assistant',
             'date_created',
             'cost',

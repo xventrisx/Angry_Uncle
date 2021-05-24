@@ -43,7 +43,7 @@ class InvitTakesAPIview(generics.CreateAPIView):
         if tokenmail:
             result = create_user(data=data)
             if result != None:
-                result = dict(user_id = result.id)
+                result = dict(user_id=result.id)
                 return rest_response.Response(data={'detail': result}, status=rest_status.HTTP_200_OK)
             else:
                 return rest_response.Response(data={'detail': result}, status=rest_status.HTTP_200_OK)

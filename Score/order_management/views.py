@@ -7,16 +7,21 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from django.contrib.auth.models import User
 from .serializers import *
+from .permission import PermissionCashier, PermissionAccountant
 from .models.order import Product, Order, Score
 from datetime import date, datetime, timedelta
 from django.dispatch import Signal
+from django.contrib.auth.models import Group
 
 create_order_signal = Signal()
 change_status_order_signal = Signal()
 
 
 class ListProductAPIView(generics.ListAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (
+        IsAuthenticated,
+        PermissionCashier,
+    )
     serializer_class = ProductSerializer
 
     def get_queryset(self):
@@ -47,7 +52,7 @@ class CreateOrderAPIView(generics.CreateAPIView):
         Тип запроса POST.
         request.data должен содержать в себе ключи
         'name', 'price', 'id'.
-        ключи хранят в под собой информацию о продукте,
+        ключи хранят  под собой информацию о продукте,
         который есть в базе данных.
         Создайот обект заказа в базе данных,
         и оповещает продавца консультанта о поступление
@@ -55,7 +60,10 @@ class CreateOrderAPIView(generics.CreateAPIView):
         Возвращает информаци о заказе в формате json.
     '''
 
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (
+        IsAuthenticated,
+        PermissionCashier,
+    )
     serializer_class = OrderSerializer
 
 
@@ -70,7 +78,10 @@ class UpdateStatusOrderAPIView(generics.UpdateAPIView):
         Обновляэт статус заказ,и оповещает касира о изменение статуса заказс
     '''
 
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (
+        IsAuthenticated,
+        PermissionCashier,
+    )
     serializer_class = OrderSerializer
 
     def get_queryset(self):
@@ -86,7 +97,10 @@ class AcceptancePaymentAPIView(generics.CreateAPIView):
         Меняет статус заказ на оплачено.
         Возвращает информаци о Score в формате json.
     '''
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (
+        IsAuthenticated,
+        PermissionCashier,
+    )
     serializer_class = ScoreSerializer
 
 
@@ -121,6 +135,7 @@ class SearchOrderAPIView(generics.ListAPIView):
     '''
     permission_classes = (
         IsAuthenticated,
+        PermissionAccountant,
     )
     serializer_class = OrderSerializer
 
