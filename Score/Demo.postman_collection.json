@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "e91e98e7-be66-4f09-8614-6e1eb2ae3859",
+		"name": "Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8000/order_management/api-token-auth/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "Cashier_user",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "qweqwe123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/order_management/api-token-auth/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"order_management",
+						"api-token-auth",
+						""
+					]
+				},
+				"description": "Ви вводитет логин и пароль зарегестрированого юзера,API фозвращает в случае валидности данных ключ 'toke', значение 'набор символов' "
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/order_management/api-receiving-product/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token bae3daf498cc12a1c12fbf5104f657304cd8a357",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name_product",
+							"value": "Стол",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/order_management/api-receiving-product/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"order_management",
+						"api-receiving-product",
+						""
+					]
+				},
+				"description": "API возвращает информацию о продукте или продуктктах, если такие имеются в базе данных в фомате JSON\r\nВ заголовках долже быть указан ключ 'Authentication', значение 'Токен ************'"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/order_management/api-create-order/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token bae3daf498cc12a1c12fbf5104f657304cd8a357",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Стол",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "1700",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/order_management/api-create-order/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"order_management",
+						"api-create-order",
+						""
+					]
+				},
+				"description": "API принимаед данные о продукте, и возвращает данные о заказе"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/order_management/api-change-status-order/3",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 25ccb26fcb3263e688044828f6f14a065aaf5466",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "READY",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "shop_assistant",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/order_management/api-change-status-order/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"order_management",
+						"api-change-status-order",
+						"3"
+					]
+				},
+				"description": "в URL API отправляете pk заказа, тело запро содержит новый статус, в ответ приходи новый устаонвленый статус."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/order_management/api-acceptance-of-payment/3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token bae3daf498cc12a1c12fbf5104f657304cd8a357",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "dress_size",
+							"value": "1360",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/order_management/api-acceptance-of-payment/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"order_management",
+						"api-acceptance-of-payment",
+						"3"
+					]
+				},
+				"description": "API принимает в URL pk заказа. в теле запроса сумма за заказ. В ответ получает чек с данными о заказе, продукте, суме платижа, и дате сождания."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/order_management/api-date-search-orders/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 0030af0b05fc8363011f19c758c947e45ee0d43d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date_start_search",
+							"value": "01.04.2005",
+							"type": "text"
+						},
+						{
+							"key": "date_finish_search",
+							"value": "09.04.2021",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/order_management/api-date-search-orders/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"order_management",
+						"api-date-search-orders",
+						""
+					]
+				},
+				"description": "API принимает в теле запроса два ключа, начало поиска и финиш поиска в формате dd.mm.yyyy. Возвращает все ордера за указаний период. или пустой список если по запросу нет заказов."
+			},
+			"response": []
+		}
+	]
+}
