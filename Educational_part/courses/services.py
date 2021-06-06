@@ -1,0 +1,1 @@
+__all__ = [    'PaginationStudent',]from .models.course import Coursefrom .models.student import Studentfrom .models.course_participant import CourseParticipantfrom rest_framework.pagination import PageNumberPaginationclass PaginationStudent(PageNumberPagination):    page_size = 10
