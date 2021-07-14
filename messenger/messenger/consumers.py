@@ -27,12 +27,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        breakpoint()
         message_manager = MessagManager(
             text_message=message,
             chat=text_data_json['dialog_id'],
         )
-        breakpoint()
-        database_sync_to_async(message_manager.create_message())
+        database_sync_to_async(message_manager.create_message)
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,

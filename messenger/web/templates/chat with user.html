@@ -11,7 +11,6 @@
     </div>
 
 </div>
-
 <textarea id="chat-log" cols="100" rows="20"></textarea><br>
 <input id="chat-message-input" type="text" size="100"><br>
 <input id="chat-message-submit" value="Отправить" type="submit">
@@ -39,9 +38,13 @@
             socket.send(JSON.stringify({
                 'message': message,
                 'dialog_id': dialog_id,
+                'sender': {{ request.user.id }},
             }));
             messageInputDom.value = '';
         };
+
+
+
 
 </script>
 {% endblock js %}

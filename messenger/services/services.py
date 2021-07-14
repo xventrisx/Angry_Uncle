@@ -18,13 +18,8 @@ from .notisend import SMS
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 
-
-
-
-
-
 def get_contact_for_user(
-    user: typing.Optional[User]
+        user: typing.Optional[User]
 ) -> typing.Union[None, QuerySet]:
     '''
     The function returns the queryset of the user's contacts.
@@ -192,9 +187,12 @@ class ChatManager:
         return group
 
 
-
 class MessagManager:
-    def __init__(self, sender, text_message=None, chat=None):
+    def __init__(
+            self, sender: typing.Optional[User],
+            text_message: typing.Optional[str] = None,
+            chat: typing.Union[int, str, Chat, None] = None,
+    ):
         self.sender = sender
         self.text_message = text_message
         self.chat = chat
@@ -219,7 +217,11 @@ class MessagManager:
             message.save()
         return message
 
-    def set_who_read(self, message):
+
+    def set_who_read(
+            self,
+            message,
+    ):
 
         """
         set_who_read принимает в себя один аргумент, ето обэкт сообщения. возврашает обект True если имеется екземпляр модели
@@ -243,7 +245,6 @@ class MessagManager:
         """
         get_messages  возвращает кверисет всех сообщений связаных с обектом self.chat.
         """
-
 
         if isinstance(self.chat, str):
             chat = Chat.objects.get(id=self.chat)
